@@ -9,6 +9,7 @@ module.exports = withBundleAnalyzer({
     domains: [
       'www.notion.so',
       'notion.so',
+      's3.us-west-2.amazonaws.com',
     ],
     formats: ['image/avif', 'image/webp'],
     dangerouslyAllowSVG: true,
