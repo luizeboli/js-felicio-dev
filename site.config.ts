@@ -42,7 +42,8 @@ export default siteConfig({
   // example:
   //
   pageUrlOverrides: {
-    '/': 'cef92c05259c4deba0e404e0f16ac870'
+    '/': 'cef92c05259c4deba0e404e0f16ac870',
+    '/hi-cypress': 'a9770b45985a44b8ae12447ede2a356a'
   },
 
   // whether to use the default notion navigation style or a custom one with links to
