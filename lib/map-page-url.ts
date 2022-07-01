@@ -10,7 +10,7 @@ import { getCanonicalPageId } from './get-canonical-page-id'
 const uuid = !!includeNotionIdInUrls
 
 export const mapPageUrl =
-  (site: Site, recordMap: ExtendedRecordMap, searchParams: URLSearchParams) =>
+  (site: Site, recordMap: ExtendedRecordMap, searchParams: URLSearchParams = new URLSearchParams()) =>
   (pageId = '') => {
     const pageUuid = parsePageId(pageId, { uuid: true })
 

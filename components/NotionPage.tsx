@@ -4,7 +4,6 @@ import Image from 'next/image'
 import dynamic from 'next/dynamic'
 import cs from 'classnames'
 import { useRouter } from 'next/router'
-import { useSearchParam } from 'react-use'
 import BodyClassName from 'react-body-classname'
 import { PageBlock } from 'notion-types'
 
@@ -153,7 +152,6 @@ export const NotionPage: React.FC<types.PageProps> = ({
   pageId
 }) => {
   const router = useRouter()
-  const lite = useSearchParam('lite')
 
   const components = React.useMemo(
     () => ({
@@ -173,18 +171,9 @@ export const NotionPage: React.FC<types.PageProps> = ({
     []
   )
 
-  // lite mode is for oembed
-  const isLiteMode = lite === 'true'
-
   const { isDarkMode } = useDarkMode()
 
-  const siteMapPageUrl = React.useMemo(() => {
-    const params: any = {}
-    if (lite) params.lite = lite
-
-    const searchParams = new URLSearchParams(params)
-    return mapPageUrl(site, recordMap, searchParams)
-  }, [site, recordMap, lite])
+  const siteMapPageUrl = React.useMemo(() => mapPageUrl(site, recordMap), [site, recordMap])
 
   const keys = Object.keys(recordMap?.block || {})
   const block = recordMap?.block?.[keys[0]]?.value
@@ -249,10 +238,10 @@ export const NotionPage: React.FC<types.PageProps> = ({
         url={canonicalPageUrl}
       />
 
-      {isLiteMode && <BodyClassName className='notion-lite' />}
       {isDarkMode && <BodyClassName className='dark-mode' />}
 
       <NotionRenderer
+        fullPage
         bodyClassName={cs(
           styles.notion,
           pageId === site.rootNotionPageId && 'index-page'
@@ -262,7 +251,6 @@ export const NotionPage: React.FC<types.PageProps> = ({
         recordMap={recordMap}
         rootPageId={site.rootNotionPageId}
         rootDomain={site.domain}
-        fullPage={!isLiteMode}
         previewImages={!!recordMap.preview_images}
         showCollectionViewDropdown={false}
         showTableOfContents={showTableOfContents}
