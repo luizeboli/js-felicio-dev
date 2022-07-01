@@ -32,10 +32,4 @@ async function searchNotionImpl(
       return Promise.reject(error)
     })
     .then((res) => res.json())
-
-  // return ky
-  //   .post(api.searchNotion, {
-  //     json: params
-  //   })
-  //   .json()
 }
